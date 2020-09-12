@@ -205,7 +205,7 @@ public extension UIViewController {
         }
     }
 
-    var initialQuery: String? {
+    var initialQuery: Query? {
         get {
             return objc_getAssociatedObject(self, &associateInitialQueryKey) as? String
         }
@@ -214,7 +214,7 @@ public extension UIViewController {
         }
     }
 
-    var query: String? {
+    var query: Query? {
         get {
             return objc_getAssociatedObject(self, &associateQueryKey) as? String
         }
@@ -223,7 +223,7 @@ public extension UIViewController {
         }
     }
     
-    func hasChanges(for query: String) -> Bool {
+    func hasChanges(for query: Query) -> Bool {
         guard
             let source = initialQuery else {
                 return true
@@ -248,7 +248,7 @@ fileprivate extension Dictionary where Key: Hashable, Value: UIViewController {
 
 fileprivate extension Sequence where Self.Element: UIViewController {
         
-    func set(query: String?) {
+    func set(query: Query?) {
         guard
             let query = query else {
             return
