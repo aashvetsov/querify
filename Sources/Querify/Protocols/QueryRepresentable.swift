@@ -15,6 +15,30 @@ public protocol QueryRepresentable: Codable {
 
 // MARK: - Private
 
+extension QueryRepresentable {
+    
+    func JSON() -> [String: Any]? {
+        let encoder = JSONEncoder()
+        
+        guard
+            let data = try? encoder.encode(self),
+            let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                return nil
+        }
+        
+        return dict
+    }
+    
+    static func decode(from dict: [String: Any]) -> Self? {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: dict)
+            return try JSONDecoder().decode(Self.self, from: data)
+        } catch {
+            return nil
+        }
+    }
+}
+
 extension String {
     
     enum QueryParamType: String {
@@ -66,23 +90,7 @@ extension String {
         
         return .string
     }
-}
-
-extension URLComponents {
     
-    mutating func setQueryItems(with parameters: [String: Any]) {
-        queryItems = parameters.map {
-            guard
-                let value = $0.value as? [String: Any] else {
-                    return URLQueryItem(name: $0.key, value: "\($0.value)")
-            }
-            return URLQueryItem(name: $0.key, value: value.jsonString)
-        }
-    }
-}
-
-extension String {
-            
     func dictionary() -> [String: Any]? {
         if let data = data(using: .utf8) {
             do {
@@ -112,6 +120,19 @@ extension String {
             }
             let value = stringValue?.replacingOccurrences(of: "\n", with: "").typedQueryValue
             dict[key] = value
+        }
+    }
+}
+
+extension URLComponents {
+    
+    mutating func setQueryItems(with parameters: [String: Any]) {
+        queryItems = parameters.map {
+            guard
+                let value = $0.value as? [String: Any] else {
+                    return URLQueryItem(name: $0.key, value: "\($0.value)")
+            }
+            return URLQueryItem(name: $0.key, value: value.jsonString)
         }
     }
 }
