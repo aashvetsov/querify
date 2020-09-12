@@ -15,30 +15,6 @@ public protocol QueryRepresentable: Codable {
 
 // MARK: - Private
 
-extension QueryRepresentable {
-    
-    func JSON() -> [String: Any]? {
-        let encoder = JSONEncoder()
-        
-        guard
-            let data = try? encoder.encode(self),
-            let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                return nil
-        }
-        
-        return dict
-    }
-    
-    static func decode(from dict: [String: Any]) -> Self? {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: dict)
-            return try JSONDecoder().decode(Self.self, from: data)
-        } catch {
-            return nil
-        }
-    }
-}
-
 extension String {
     
     enum QueryParamType: String {

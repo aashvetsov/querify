@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  QueryRepresentable+Public.swift
 //  
 //
 //  Created by Artem Shvetsov on 12.09.2020.
@@ -35,43 +35,8 @@ public extension QueryRepresentable {
 
         return Self.decode(from: dict)
     }
-}
 
-public extension String {
-    
-    func hasChanges(comparing with: String?) -> Bool {
-        guard
-            let target = with?.queryDictionary,
-            let source = queryDictionary else {
-                return true
-        }
-
-        let sourceDict = NSDictionary(dictionary: source)
-        let targetDict = NSDictionary(dictionary: target)
-
-        return !sourceDict.isEqual(targetDict)
-    }
-}
-
-public extension Mergable {
-    
-    func merge(with: Self) -> Self? {
-        guard
-            var selfDict = dictionary(),
-            let withDict = with.dictionary() else {
-                return nil
-        }
-
-        selfDict.merge(withDict, uniquingKeysWith: { (_, new) in new })
-        guard
-            let final = try? JSONSerialization.data(withJSONObject: selfDict) else {
-                return nil
-        }
-        
-        return try? JSONDecoder().decode(Self.self, from: final)
-    }
-    
-    func dictionary() -> [String: Any]? {
+    func JSON() -> [String: Any]? {
         let encoder = JSONEncoder()
         
         guard
