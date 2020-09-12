@@ -9,7 +9,7 @@ import Foundation
 
 public extension QueryRepresentable {
     
-    func query() -> String? {
+    func query() -> Query? {
         guard let json = JSON() else { return nil }
 
         var urlComponents = URLComponents()
@@ -25,7 +25,7 @@ public extension QueryRepresentable {
         return query
     }
 
-    static func from(query: String?) -> Self? {
+    static func from(query: Query?) -> Self? {
         let query = query?.removingPercentEncoding
         
         guard
