@@ -1,0 +1,16 @@
+**/xcuserdata/*
+/Pods/*
+*.xcscmblueprint
+**/.idea/*
+/Carthage/**
+/Submodules/**
+# fastlane specific
+**/fastlane/report.xml
+**/fastlane/test_output
+**/fastlane/README.md
+**/fastlane/Preview.html
+# scan temporary files
+*.ipa
+*.app.dSYM.zip
+Build/**
+.build/**
