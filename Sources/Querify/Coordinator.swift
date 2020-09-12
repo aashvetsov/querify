@@ -194,9 +194,9 @@ private var associateCoordinatorKey: Void?
 private var associateInitialQueryKey: Void?
 private var associateQueryKey: Void?
 
-extension UIViewController {
+public extension UIViewController {
     
-    open var coordinator: Coordinator? {
+    var coordinator: Coordinator? {
         get {
             return objc_getAssociatedObject(self, &associateCoordinatorKey) as? Coordinator
         }
@@ -214,7 +214,7 @@ extension UIViewController {
         }
     }
 
-    open var query: String? {
+    var query: String? {
         get {
             return objc_getAssociatedObject(self, &associateQueryKey) as? String
         }
@@ -223,7 +223,7 @@ extension UIViewController {
         }
     }
     
-    open func hasChanges(for query: String) -> Bool {
+    func hasChanges(for query: String) -> Bool {
         guard
             let source = initialQuery else {
                 return true
