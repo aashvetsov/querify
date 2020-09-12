@@ -1,2 +1,3 @@
-# querify
-Navigation Framework 
+# Querify
+
+A description of this package.
