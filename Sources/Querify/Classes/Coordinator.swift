@@ -28,11 +28,11 @@ public class Coordinator {
     // MARK: - Public
 
     public let identifier: CoordinatorId?
-    public let owner: CoordinatorOwner?
+    public var owner: CoordinatorOwner?
 
     required public init(identifier: CoordinatorId?,
                          path: CoordinatorPath,
-                         owner: CoordinatorOwner) {
+                         owner: CoordinatorOwner? = nil) {
         self.owner = owner
         self.path = path
         self.identifier = identifier
@@ -51,7 +51,7 @@ public class Coordinator {
     
     required public init(identifier: CoordinatorId?,
                          path: CoordinatorPath,
-                         owner: CoordinatorOwner,
+                         owner: CoordinatorOwner? = nil,
                          navigator: UINavigationController) {
         self.owner = owner
         self.path = path
