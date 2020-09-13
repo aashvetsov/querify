@@ -64,7 +64,7 @@ public class Coordinator {
         }
     }
     
-    var isModalInPresentation: Bool? {
+    public var isModalInPresentation: Bool? {
         didSet {
             if #available(iOS 13.0, *) {
                 navigator?.isModalInPresentation = isModalInPresentation ?? false
@@ -72,7 +72,7 @@ public class Coordinator {
         }
     }
 
-    var modalPresentationStyle: UIModalPresentationStyle? {
+    public var modalPresentationStyle: UIModalPresentationStyle? {
         didSet {
             guard let modalPresentationStyle = modalPresentationStyle else {
                 return
