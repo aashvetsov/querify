@@ -63,6 +63,14 @@ public class Coordinator {
             controller.coordinator = self
         }
     }
+    
+    var isModalInPresentation: Bool? {
+        didSet {
+            if #available(iOS 13.0, *) {
+                navigator?.isModalInPresentation = isModalInPresentation ?? false
+            }
+        }
+    }
         
     // MARK: - Private
 
