@@ -71,7 +71,16 @@ public class Coordinator {
             }
         }
     }
-        
+
+    var modalPresentationStyle: UIModalPresentationStyle? {
+        didSet {
+            guard let modalPresentationStyle = modalPresentationStyle else {
+                return
+            }
+            navigator?.modalPresentationStyle = modalPresentationStyle
+        }
+    }
+
     // MARK: - Private
 
     fileprivate var navigator: UINavigationController?
